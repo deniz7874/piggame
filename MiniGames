@@ -1,0 +1,103 @@
+// Date: Dec 13 2025
+// Author: Deniz Kilic
+// Description: Mini Games Progra temp
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class MiniGames {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+        int choice = 0;
+
+        // ASCII art title
+        System.out.println("╔══════════════════════╗");
+        System.out.println("║  Mini Games Program  ║");
+        System.out.println("╚══════════════════════╝");
+
+        // main menu loop
+        while (choice != 4) {
+            System.out.println("\nChoose from the following options.");
+            System.out.println("1. Rock/Paper/Scissors Game");
+            System.out.println("2. High/Low Guessing Game");
+            System.out.println("3. Tic Tac Toe Game");
+            System.out.println("4. Exit the program");
+            System.out.print("Enter choice: ");
+
+            try {
+                choice = input.nextInt();
+            } catch (Exception e) {
+                System.out.println("invalid: not a number");
+                input.next(); // clear bad input
+                continue;
+            }
+
+            if (choice == 1) {
+                rpsMenu(input, rand);
+            } else if (choice == 2) {
+                // highLowGame(); // not done yet
+                System.out.println("High/Low not done");
+            } else if (choice == 3) {
+                // ticTacToe(); // not dine yet
+                System.out.println("Tic Tac Toe not done");
+            } else if (choice == 4) {
+                System.out.println("goodbye");
+            } else {
+                System.out.println("invalid choice");
+            }
+        }
+    }
+
+    public static void rpsMenu(Scanner input, Random rand) {
+        int rpsChoice = 0;
+        while (rpsChoice != 3) {
+            System.out.println("\nWelcome to my RPS program.");
+            System.out.println("1. One player game");
+            System.out.println("2. Two player game");
+            System.out.println("3. Return to Main Menu");
+            System.out.print("Enter choice: ");
+            rpsChoice = input.nextInt();
+
+            if (rpsChoice == 1) {
+                playRPS(input, rand);
+            } else if (rpsChoice == 2) {
+                System.out.println("2 player not done yet");
+            } else if (rpsChoice == 3) {
+                System.out.println("back to main menu");
+            } else {
+                System.out.println("try again");
+            }
+        }
+    }
+
+    public static void playRPS(Scanner input, Random rand) {
+        String[] options = {"rock", "paper", "scissors"};
+        int playerScore = 0;
+        int compScore = 0;
+
+        System.out.println("Your Turn. Choose Rock, Paper, or Scissors:");
+        String player = input.next().toLowerCase();
+        String comp = options[rand.nextInt(3)];
+
+        System.out.println("You chose: " + player);
+        System.out.println("Computer chose: " + comp);
+
+        // basic logic
+        if (player.equals(comp)) {
+            System.out.println("It's a tie!");
+        } else if ((player.equals("rock") && comp.equals("scissors")) ||
+                   (player.equals("paper") && comp.equals("rock")) ||
+                   (player.equals("scissors") && comp.equals("paper"))) {
+            System.out.println("You win!");
+            playerScore++;
+        } else {
+            System.out.println("Computer wins!");
+            compScore++;
+        }
+
+        System.out.println("Score: Computer - " + compScore + " You - " + playerScore);
+        // loop, score tracking, colors
+    }
+}
