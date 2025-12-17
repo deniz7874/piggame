@@ -2,8 +2,8 @@
 // Author: Deniz Kilic
 // Description: Mini Games Progra temp
 
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 public class MiniGames {
 
@@ -38,9 +38,9 @@ public class MiniGames {
                 rpsMenu(input, rand);
             } else if (choice == 2) {
                 // highLowGame(); // not done yet
-                System.out.println("High/Low not done");
+                hlMenu(input, rand);
             } else if (choice == 3) {
-                // ticTacToe(); // not dine yet
+                // ticTacToe(); // not done yet
                 System.out.println("Tic Tac Toe not done");
             } else if (choice == 4) {
                 System.out.println("goodbye");
@@ -96,8 +96,59 @@ public class MiniGames {
             System.out.println("Computer wins!");
             compScore++;
         }
-
-        System.out.println("Score: Computer - " + compScore + " You - " + playerScore);
+         System.out.println("Score: Computer - " + compScore + " You - " + playerScore);
         // loop, score tracking, colors
     }
+
+       
+
+    public static void hlMenu(Scanner input, Random rand) {
+        int hlChoice = 0;
+        while (hlChoice != 3) {
+            System.out.println ("\nWelcome to High/Low Guessing Game.");
+            System.out.println ("Enter a level of difficulty:");
+            System.out.println ("1. Easy (1-10)");
+            System.out.println ("2. Medium (1-50)");
+            System.out.println ("3. Hard (1-100)");
+            System.out.print("Enter choice: ");
+            hlChoice = input.nextInt();
+
+            if (hlChoice == 1) {
+                highLowGame(input, rand, 10);
+            } else if (hlChoice == 2) {
+                highLowGame(input, rand, 50);
+            } else if (hlChoice == 3) {
+                highLowGame(input, rand, 100);
+            } else {
+                System.out.println("Invalid choice");
+            }
+
+        
+        }
+    }
+
+    public static void highLowGame(Scanner input, Random rand, int maxNumber) {
+        int target = rand.nextInt(maxNumber) + 1;
+        int guess = 0;
+        int attempts = 0;
+
+        System.out.println("Guess a number between 1 and " + maxNumber + ":");
+        while (guess != target) {
+            try {
+                guess = input.nextInt();
+                attempts++;
+                if (guess < target) {
+                    System.out.println("Too low!");
+                } else if (guess > target) {
+                    System.out.println("Too high!");
+                } else {
+                    System.out.println("Correct! You guessed it in " + attempts + " attempts.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                input.next(); // clear bad input
+            }
+        }
+    }
 }
+
